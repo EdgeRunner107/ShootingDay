@@ -178,3 +178,30 @@
     margin-top: 0;
   }
 }
+.admin-delay-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+}
+
+.admin-delay-control input {
+  width: 82px;
+  padding: 8px 9px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  outline: none;
+  color: #fff;
+  background: #0d1420;
+}
+
+@media (max-width: 760px) {
+  .admin-delay-control {
+    display: flex;
+    margin: 0 0 8px;
+  }
+
+  .admin-delay-control input {
+    width: 100px;
+  }
+}
