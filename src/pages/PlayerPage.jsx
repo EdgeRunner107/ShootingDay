@@ -53,7 +53,7 @@ function CyberGridOverlay() {
           pointerEvents: "none",
           opacity: 0.08,
           backgroundImage:
-            "linear-gradient(rgba(255, 47, 179, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 47, 179, 0.5) 1px, transparent 1px)",
+            "linear-gradient(rgba(255,47,179,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,47,179,0.5) 1px, transparent 1px)",
           backgroundSize: "28px 28px"
         }}
       />
@@ -93,7 +93,7 @@ function CyberpunkButton({
         overflow: "hidden",
         border: `1px solid ${
           disabled
-            ? "rgba(255, 120, 216, 0.25)"
+            ? "rgba(255,120,216,0.25)"
             : cyberColors.pinkLight
         }`,
         borderRadius: "12px",
@@ -272,6 +272,7 @@ function CyberpunkInput({
         minHeight: "50px",
         padding: "12px 14px",
         outline: "none",
+        boxSizing: "border-box",
         border:
           "1px solid rgba(255,74,194,0.28)",
         borderRadius: "11px",
@@ -279,7 +280,6 @@ function CyberpunkInput({
           "rgba(7,2,15,0.78)",
         color: "#ffffff",
         fontSize: "15px",
-        boxSizing: "border-box",
         boxShadow:
           "inset 0 0 14px rgba(0,0,0,0.42)",
         transition:
@@ -300,6 +300,35 @@ function CyberpunkInput({
           "inset 0 0 14px rgba(0,0,0,0.42)";
       }}
     />
+  );
+}
+
+function StatusPill({ executed }) {
+  return (
+    <span
+      style={{
+        flexShrink: 0,
+        padding: "5px 8px",
+        borderRadius: "999px",
+        border: `1px solid ${
+          executed
+            ? "rgba(74,255,176,0.4)"
+            : "rgba(255,77,198,0.4)"
+        }`,
+        background: executed
+          ? "rgba(74,255,176,0.1)"
+          : "rgba(255,47,179,0.1)",
+        color: executed
+          ? "#65ffc0"
+          : "#ff79da",
+        fontSize: "10px",
+        fontWeight: 900
+      }}
+    >
+      {executed
+        ? "실행 완료"
+        : "실행 대기"}
+    </span>
   );
 }
 
@@ -383,30 +412,9 @@ function ShotHistoryCard({ action }) {
           </strong>
         </div>
 
-        <span
-          style={{
-            flexShrink: 0,
-            padding: "5px 8px",
-            borderRadius: "999px",
-            border: `1px solid ${
-              action.executed
-                ? "rgba(74,255,176,0.4)"
-                : "rgba(255,77,198,0.4)"
-            }`,
-            background: action.executed
-              ? "rgba(74,255,176,0.1)"
-              : "rgba(255,47,179,0.1)",
-            color: action.executed
-              ? "#65ffc0"
-              : "#ff79da",
-            fontSize: "10px",
-            fontWeight: 900
-          }}
-        >
-          {action.executed
-            ? "실행 완료"
-            : "실행 대기"}
-        </span>
+        <StatusPill
+          executed={action.executed}
+        />
       </div>
 
       <div
@@ -467,7 +475,7 @@ function ShotHistoryCard({ action }) {
   );
 }
 
-function MyLogCard({ action }) {
+function SentLogCard({ action }) {
   return (
     <article
       style={{
@@ -515,7 +523,7 @@ function MyLogCard({ action }) {
               fontSize: "10px"
             }}
           >
-            TARGET
+            내가 쏜 대상
           </span>
 
           <strong
@@ -529,30 +537,9 @@ function MyLogCard({ action }) {
           </strong>
         </div>
 
-        <span
-          style={{
-            flexShrink: 0,
-            padding: "5px 8px",
-            borderRadius: "999px",
-            border: `1px solid ${
-              action.executed
-                ? "rgba(74,255,176,0.4)"
-                : "rgba(255,77,198,0.4)"
-            }`,
-            background: action.executed
-              ? "rgba(74,255,176,0.1)"
-              : "rgba(255,47,179,0.1)",
-            color: action.executed
-              ? "#65ffc0"
-              : "#ff79da",
-            fontSize: "10px",
-            fontWeight: 900
-          }}
-        >
-          {action.executed
-            ? "실행 완료"
-            : "실행 대기"}
-        </span>
+        <StatusPill
+          executed={action.executed}
+        />
       </div>
 
       <div
@@ -571,6 +558,124 @@ function MyLogCard({ action }) {
             background:
               "rgba(255,47,179,0.1)",
             color: cyberColors.pinkLight,
+            fontWeight: 900
+          }}
+        >
+          💥 {Number(action.used_bullets || 0)}발
+        </div>
+
+        <p
+          style={{
+            margin: 0,
+            color:
+              "rgba(255,255,255,0.78)",
+            fontSize: "13px",
+            lineHeight: 1.55,
+            wordBreak: "break-word"
+          }}
+        >
+          {action.action_text ||
+            "등록된 텍스트가 없습니다."}
+        </p>
+      </div>
+
+      <div
+        style={{
+          marginTop: "12px",
+          color:
+            "rgba(255,255,255,0.38)",
+          fontSize: "11px",
+          textAlign: "right"
+        }}
+      >
+        {formatDate(action.created_at)}
+      </div>
+    </article>
+  );
+}
+
+function ReceivedLogCard({ action }) {
+  return (
+    <article
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        padding: "15px",
+        border:
+          "1px solid rgba(213,0,255,0.28)",
+        borderRadius: "14px",
+        background:
+          "linear-gradient(145deg, rgba(31,8,42,0.96), rgba(13,4,23,0.98))"
+      }}
+    >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "15%",
+          bottom: "15%",
+          left: 0,
+          width: "3px",
+          borderRadius: "999px",
+          background:
+            "linear-gradient(#d500ff, #ff2fb3)",
+          boxShadow:
+            "0 0 12px rgba(213,0,255,0.9)"
+        }}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          gap: "10px"
+        }}
+      >
+        <div>
+          <span
+            style={{
+              display: "block",
+              marginBottom: "4px",
+              color:
+                "rgba(255,255,255,0.45)",
+              fontSize: "10px"
+            }}
+          >
+            나에게 쏜 사람
+          </span>
+
+          <strong
+            style={{
+              color: "#e879ff",
+              fontSize: "16px"
+            }}
+          >
+            익명
+          </strong>
+        </div>
+
+        <StatusPill
+          executed={action.executed}
+        />
+      </div>
+
+      <div
+        style={{
+          marginTop: "13px",
+          display: "flex",
+          alignItems: "flex-start",
+          gap: "10px"
+        }}
+      >
+        <div
+          style={{
+            flexShrink: 0,
+            padding: "8px 10px",
+            borderRadius: "10px",
+            background:
+              "rgba(213,0,255,0.1)",
+            color: "#e879ff",
             fontWeight: 900
           }}
         >
@@ -757,6 +862,24 @@ function WelcomeLoading({
   );
 }
 
+function EmptyLog({ children }) {
+  return (
+    <div
+      style={{
+        padding: "28px 14px",
+        border:
+          "1px dashed rgba(255,61,192,0.23)",
+        borderRadius: "13px",
+        color: cyberColors.muted,
+        textAlign: "center",
+        fontSize: "13px"
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function PlayerPage() {
   const [players, setPlayers] = useState([]);
   const [actions, setActions] = useState([]);
@@ -797,14 +920,22 @@ export default function PlayerPage() {
   const [shotText, setShotText] =
     useState("");
 
-  const [myActions, setMyActions] =
-    useState([]);
-
   const [showMyLogs, setShowMyLogs] =
     useState(false);
 
   const [myLogsLoading, setMyLogsLoading] =
     useState(false);
+
+  const [myLogTab, setMyLogTab] =
+    useState("sent");
+
+  const [mySentActions, setMySentActions] =
+    useState([]);
+
+  const [
+    myReceivedActions,
+    setMyReceivedActions
+  ] = useState([]);
 
   const showToast = useCallback((message) => {
     setToast(message);
@@ -887,8 +1018,9 @@ export default function PlayerPage() {
 
             setCurrentPlayerId("");
             setLoginPlayer(null);
-            setMyActions([]);
             setShowMyLogs(false);
+            setMySentActions([]);
+            setMyReceivedActions([]);
           }
         }
       } catch (error) {
@@ -944,8 +1076,10 @@ export default function PlayerPage() {
   }, [welcomeVisible]);
 
   useEffect(() => {
-    setMyActions([]);
     setShowMyLogs(false);
+    setMyLogTab("sent");
+    setMySentActions([]);
+    setMyReceivedActions([]);
   }, [currentPlayerId]);
 
   const currentPlayer = useMemo(() => {
@@ -970,7 +1104,8 @@ export default function PlayerPage() {
   }, [players, currentPlayerId]);
 
   async function enterPlayer() {
-    const cleanNickname = nickname.trim();
+    const cleanNickname =
+      nickname.trim();
 
     if (
       !isSupabaseConfigured ||
@@ -982,7 +1117,10 @@ export default function PlayerPage() {
       return;
     }
 
-    if (!cleanNickname || !loginPassword) {
+    if (
+      !cleanNickname ||
+      !loginPassword
+    ) {
       showToast(
         "닉네임과 비밀번호를 입력하세요."
       );
@@ -1019,13 +1157,14 @@ export default function PlayerPage() {
         player.id
       );
 
-      setMyActions([]);
-      setShowMyLogs(false);
-
       setCurrentPlayerId(player.id);
       setLoginPlayer(player);
       setSelectedTargetId("");
       setLoginPassword("");
+      setShowMyLogs(false);
+      setMyLogTab("sent");
+      setMySentActions([]);
+      setMyReceivedActions([]);
       setWelcomeNickname(player.nickname);
       setWelcomeVisible(true);
 
@@ -1042,74 +1181,122 @@ export default function PlayerPage() {
     }
   }
 
-  async function loadMyActions() {
+  async function loadMyLogs() {
     if (
       !supabase ||
-      !currentPlayer?.id
+      !currentPlayer?.nickname
     ) {
-      setMyActions([]);
+      setMySentActions([]);
+      setMyReceivedActions([]);
       return;
     }
 
-    const loggedInPlayerId =
-      currentPlayer.id;
+    const loggedInNickname =
+      currentPlayer.nickname;
 
     setMyLogsLoading(true);
-    setMyActions([]);
+    setMySentActions([]);
+    setMyReceivedActions([]);
 
     try {
-      const { data, error } =
-        await supabase
-          .from("bullet_actions")
+      const [
+        sentResult,
+        receivedResult
+      ] = await Promise.all([
+        supabase
+          .from("player_bullet_actions")
           .select(
-            "id, created_at, player_id, target_nickname, used_bullets, action_text, executed, executed_at"
+            "id, created_at, nickname, target_nickname, used_bullets, action_text, executed, executed_at"
           )
           .eq(
-            "player_id",
-            loggedInPlayerId
+            "nickname",
+            loggedInNickname
           )
           .order("created_at", {
             ascending: false
           })
-          .limit(50);
+          .limit(50),
 
-      if (error) {
-        throw error;
+        supabase
+          .from("player_bullet_actions")
+          .select(
+            "id, created_at, target_nickname, used_bullets, action_text, executed, executed_at"
+          )
+          .eq(
+            "target_nickname",
+            loggedInNickname
+          )
+          .order("created_at", {
+            ascending: false
+          })
+          .limit(50)
+      ]);
+
+      if (sentResult.error) {
+        throw sentResult.error;
       }
 
-      /*
-       * 서버에서 player_id로 조회한 뒤에도
-       * 현재 로그인 플레이어 id와 정확히 같은 기록만
-       * 한 번 더 필터링합니다.
-       */
-      const safeMyActions = (
-        data || []
-      ).filter(
-        (action) =>
-          String(action.player_id) ===
-          String(loggedInPlayerId)
-      );
+      if (receivedResult.error) {
+        throw receivedResult.error;
+      }
 
-      /*
-       * 조회 중 로그인 계정이 바뀐 경우
-       * 이전 계정의 결과를 화면에 넣지 않습니다.
-       */
-      const storedPlayerId =
+      const activePlayerId =
         sessionStorage.getItem(
           "bullet_current_player_id"
         );
 
       if (
-        String(storedPlayerId) !==
-        String(loggedInPlayerId)
+        String(activePlayerId) !==
+        String(currentPlayer.id)
       ) {
-        setMyActions([]);
+        setMySentActions([]);
+        setMyReceivedActions([]);
         return;
       }
 
-      setMyActions(safeMyActions);
+      const safeSentActions = (
+        sentResult.data || []
+      ).filter(
+        (action) =>
+          String(action.nickname) ===
+          String(loggedInNickname)
+      );
+
+      const safeReceivedActions = (
+        receivedResult.data || []
+      )
+        .filter(
+          (action) =>
+            String(
+              action.target_nickname
+            ) ===
+            String(loggedInNickname)
+        )
+        .map((action) => ({
+          id: action.id,
+          created_at: action.created_at,
+          target_nickname:
+            action.target_nickname,
+          used_bullets:
+            action.used_bullets,
+          action_text:
+            action.action_text,
+          executed:
+            action.executed,
+          executed_at:
+            action.executed_at
+        }));
+
+      setMySentActions(
+        safeSentActions
+      );
+
+      setMyReceivedActions(
+        safeReceivedActions
+      );
     } catch (error) {
-      setMyActions([]);
+      setMySentActions([]);
+      setMyReceivedActions([]);
 
       showToast(
         error.message ||
@@ -1123,12 +1310,15 @@ export default function PlayerPage() {
   async function toggleMyLogs() {
     if (showMyLogs) {
       setShowMyLogs(false);
-      setMyActions([]);
+      setMySentActions([]);
+      setMyReceivedActions([]);
       return;
     }
 
     setShowMyLogs(true);
-    await loadMyActions();
+    setMyLogTab("sent");
+
+    await loadMyLogs();
   }
 
   function leavePlayer() {
@@ -1147,8 +1337,10 @@ export default function PlayerPage() {
     setNickname("");
     setLoginPassword("");
     setShowMyLogs(false);
-    setMyActions([]);
     setMyLogsLoading(false);
+    setMyLogTab("sent");
+    setMySentActions([]);
+    setMyReceivedActions([]);
   }
 
   async function fireBullet() {
@@ -1167,9 +1359,13 @@ export default function PlayerPage() {
         player.id === selectedTargetId
     );
 
-    const amount = Number(shotAmount);
+    const amount =
+      Number(shotAmount);
 
-    if (!currentPlayer || !target) {
+    if (
+      !currentPlayer ||
+      !target
+    ) {
       showToast(
         "사격 대상을 선택하세요."
       );
@@ -1187,7 +1383,8 @@ export default function PlayerPage() {
     }
 
     if (
-      remaining(currentPlayer) < amount
+      remaining(currentPlayer) <
+      amount
     ) {
       showToast(
         "남은 총알이 부족합니다."
@@ -1235,7 +1432,10 @@ export default function PlayerPage() {
                 target.hit_bullets || 0
               ) + amount
           })
-          .eq("id", target.id);
+          .eq(
+            "id",
+            target.id
+          );
 
       if (targetResult.error) {
         throw targetResult.error;
@@ -1256,7 +1456,8 @@ export default function PlayerPage() {
             target_nickname:
               target.nickname,
             used_bullets: amount,
-            action_text: actionText,
+            action_text:
+              actionText,
             delay_seconds: 0,
             executed: false
           });
@@ -1274,7 +1475,7 @@ export default function PlayerPage() {
       });
 
       if (showMyLogs) {
-        await loadMyActions();
+        await loadMyLogs();
       }
 
       showToast(
@@ -1508,7 +1709,8 @@ export default function PlayerPage() {
                   }
                   onKeyDown={(event) => {
                     if (
-                      event.key === "Enter"
+                      event.key ===
+                      "Enter"
                     ) {
                       enterPlayer();
                     }
@@ -1546,7 +1748,8 @@ export default function PlayerPage() {
                   }
                   onKeyDown={(event) => {
                     if (
-                      event.key === "Enter"
+                      event.key ===
+                      "Enter"
                     ) {
                       enterPlayer();
                     }
@@ -1602,7 +1805,6 @@ export default function PlayerPage() {
           margin: "0 auto"
         }}
       >
-        {/* 플레이어 정보 */}
         <section
           style={{
             position: "relative",
@@ -1735,7 +1937,10 @@ export default function PlayerPage() {
                       "0 0 12px rgba(255,47,179,0.5)"
                   }}
                 >
-                  {remaining(currentPlayer)}발
+                  {remaining(
+                    currentPlayer
+                  )}
+                  발
                 </strong>
               </div>
 
@@ -1828,7 +2033,6 @@ export default function PlayerPage() {
           </div>
         </section>
 
-        {/* 사격 대상 */}
         <section
           style={{
             position: "relative",
@@ -1901,21 +2105,9 @@ export default function PlayerPage() {
               }}
             >
               {targets.length === 0 ? (
-                <div
-                  style={{
-                    gridColumn: "1 / -1",
-                    padding: "24px 14px",
-                    border:
-                      "1px dashed rgba(255,61,192,0.24)",
-                    borderRadius: "13px",
-                    color:
-                      cyberColors.muted,
-                    textAlign: "center",
-                    fontSize: "13px"
-                  }}
-                >
+                <EmptyLog>
                   사격 가능한 대상이 없습니다.
-                </div>
+                </EmptyLog>
               ) : (
                 targets.map((target) => {
                   const selected =
@@ -2057,7 +2249,6 @@ export default function PlayerPage() {
           </div>
         </section>
 
-        {/* 공개 최신 기록 */}
         <section
           style={{
             position: "relative",
@@ -2123,8 +2314,8 @@ export default function PlayerPage() {
                     lineHeight: 1.5
                   }}
                 >
-                  가장 최근 사격 기록 1개만
-                  표시됩니다.
+                  가장 최근 기록 1개만 표시되며
+                  발사자는 익명입니다.
                 </p>
               </div>
 
@@ -2148,20 +2339,9 @@ export default function PlayerPage() {
             </div>
 
             {actions.length === 0 ? (
-              <div
-                style={{
-                  padding: "28px 14px",
-                  border:
-                    "1px dashed rgba(255,61,192,0.23)",
-                  borderRadius: "13px",
-                  color:
-                    cyberColors.muted,
-                  textAlign: "center",
-                  fontSize: "13px"
-                }}
-              >
+              <EmptyLog>
                 아직 사격 기록이 없습니다.
-              </div>
+              </EmptyLog>
             ) : (
               actions
                 .slice(0, 1)
@@ -2175,7 +2355,6 @@ export default function PlayerPage() {
           </div>
         </section>
 
-        {/* 본인 전용 로그 */}
         <section
           style={{
             position: "relative",
@@ -2240,8 +2419,8 @@ export default function PlayerPage() {
                     lineHeight: 1.5
                   }}
                 >
-                  현재 로그인한 플레이어가 직접
-                  사용한 기록만 표시됩니다.
+                  내가 쏜 목록과 내가 맞은 목록을
+                  확인합니다.
                 </p>
               </div>
 
@@ -2263,37 +2442,121 @@ export default function PlayerPage() {
                   marginTop: "18px"
                 }}
               >
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                      "repeat(2, minmax(0, 1fr))",
+                    gap: "8px",
+                    marginBottom: "14px"
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMyLogTab("sent")
+                    }
+                    style={{
+                      minHeight: "46px",
+                      padding: "8px",
+                      border:
+                        myLogTab === "sent"
+                          ? `1px solid ${cyberColors.pinkLight}`
+                          : "1px solid rgba(255,62,194,0.22)",
+                      borderRadius: "11px",
+                      background:
+                        myLogTab === "sent"
+                          ? "linear-gradient(145deg, rgba(255,47,179,0.22), rgba(213,0,255,0.14))"
+                          : "rgba(255,255,255,0.025)",
+                      color:
+                        myLogTab === "sent"
+                          ? cyberColors.pinkLight
+                          : "rgba(255,255,255,0.6)",
+                      fontSize: "12px",
+                      fontWeight: 900,
+                      cursor: "pointer",
+                      boxShadow:
+                        myLogTab === "sent"
+                          ? "0 0 16px rgba(255,47,179,0.25)"
+                          : "none"
+                    }}
+                  >
+                    내가 쏜 목록{" "}
+                    {mySentActions.length}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMyLogTab(
+                        "received"
+                      )
+                    }
+                    style={{
+                      minHeight: "46px",
+                      padding: "8px",
+                      border:
+                        myLogTab ===
+                        "received"
+                          ? `1px solid ${cyberColors.pinkLight}`
+                          : "1px solid rgba(255,62,194,0.22)",
+                      borderRadius: "11px",
+                      background:
+                        myLogTab ===
+                        "received"
+                          ? "linear-gradient(145deg, rgba(255,47,179,0.22), rgba(213,0,255,0.14))"
+                          : "rgba(255,255,255,0.025)",
+                      color:
+                        myLogTab ===
+                        "received"
+                          ? cyberColors.pinkLight
+                          : "rgba(255,255,255,0.6)",
+                      fontSize: "12px",
+                      fontWeight: 900,
+                      cursor: "pointer",
+                      boxShadow:
+                        myLogTab ===
+                        "received"
+                          ? "0 0 16px rgba(255,47,179,0.25)"
+                          : "none"
+                    }}
+                  >
+                    내가 맞은 목록{" "}
+                    {myReceivedActions.length}
+                  </button>
+                </div>
+
                 {myLogsLoading ? (
-                  <div
-                    style={{
-                      padding: "28px 14px",
-                      border:
-                        "1px dashed rgba(255,61,192,0.23)",
-                      borderRadius: "13px",
-                      color:
-                        cyberColors.muted,
-                      textAlign: "center",
-                      fontSize: "13px"
-                    }}
-                  >
+                  <EmptyLog>
                     내 기록을 불러오고 있습니다.
-                  </div>
-                ) : myActions.length === 0 ? (
-                  <div
-                    style={{
-                      padding: "28px 14px",
-                      border:
-                        "1px dashed rgba(255,61,192,0.23)",
-                      borderRadius: "13px",
-                      color:
-                        cyberColors.muted,
-                      textAlign: "center",
-                      fontSize: "13px"
-                    }}
-                  >
-                    아직 내가 사용한 총알 기록이
-                    없습니다.
-                  </div>
+                  </EmptyLog>
+                ) : myLogTab === "sent" ? (
+                  mySentActions.length === 0 ? (
+                    <EmptyLog>
+                      아직 내가 쏜 기록이 없습니다.
+                    </EmptyLog>
+                  ) : (
+                    <div
+                      style={{
+                        display: "grid",
+                        gap: "10px"
+                      }}
+                    >
+                      {mySentActions.map(
+                        (action) => (
+                          <SentLogCard
+                            key={action.id}
+                            action={action}
+                          />
+                        )
+                      )}
+                    </div>
+                  )
+                ) : myReceivedActions.length ===
+                  0 ? (
+                  <EmptyLog>
+                    아직 내가 맞은 기록이 없습니다.
+                  </EmptyLog>
                 ) : (
                   <div
                     style={{
@@ -2301,9 +2564,9 @@ export default function PlayerPage() {
                       gap: "10px"
                     }}
                   >
-                    {myActions.map(
+                    {myReceivedActions.map(
                       (action) => (
-                        <MyLogCard
+                        <ReceivedLogCard
                           key={action.id}
                           action={action}
                         />
