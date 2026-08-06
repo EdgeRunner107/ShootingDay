@@ -78,7 +78,6 @@ function CyberpunkButton({
   onClick,
   disabled = false,
   full = false,
-  compact = false,
   type = "button"
 }) {
   return (
@@ -89,29 +88,25 @@ function CyberpunkButton({
       style={{
         position: "relative",
         width: full ? "100%" : "auto",
-        minHeight: compact ? "38px" : "52px",
-        padding: compact
-          ? "8px 13px"
-          : "13px 18px",
+        minHeight: "52px",
+        padding: "13px 18px",
         overflow: "hidden",
         border: `1px solid ${
           disabled
             ? "rgba(255, 120, 216, 0.25)"
             : cyberColors.pinkLight
         }`,
-        borderRadius: compact ? "9px" : "12px",
+        borderRadius: "12px",
         background: disabled
           ? "linear-gradient(135deg, #4e1b43, #32102e)"
           : "linear-gradient(135deg, #ff168f 0%, #ff2fb3 48%, #d500ff 100%)",
         boxShadow: disabled
           ? "none"
-          : "0 0 8px rgba(255, 47, 179, 0.85), 0 0 22px rgba(255, 0, 183, 0.48), inset 0 0 14px rgba(255, 255, 255, 0.18)",
+          : "0 0 8px rgba(255,47,179,0.85), 0 0 22px rgba(255,0,183,0.48), inset 0 0 14px rgba(255,255,255,0.18)",
         color: "#ffffff",
-        fontSize: compact ? "13px" : "16px",
+        fontSize: "16px",
         fontWeight: 900,
-        letterSpacing: compact
-          ? "0.02em"
-          : "0.06em",
+        letterSpacing: "0.06em",
         textShadow:
           "0 0 8px rgba(255,255,255,0.65)",
         cursor: disabled
@@ -131,17 +126,19 @@ function CyberpunkButton({
           "brightness(1.13) saturate(1.18)";
 
         event.currentTarget.style.boxShadow =
-          "0 0 12px rgba(255, 47, 179, 1), 0 0 34px rgba(255, 0, 183, 0.82), 0 0 50px rgba(213, 0, 255, 0.36), inset 0 0 16px rgba(255, 255, 255, 0.22)";
+          "0 0 12px rgba(255,47,179,1), 0 0 34px rgba(255,0,183,0.82), 0 0 50px rgba(213,0,255,0.36), inset 0 0 16px rgba(255,255,255,0.22)";
       }}
       onMouseLeave={(event) => {
         event.currentTarget.style.transform =
           "translateY(0)";
 
-        event.currentTarget.style.filter = "none";
+        event.currentTarget.style.filter =
+          "none";
 
-        event.currentTarget.style.boxShadow = disabled
-          ? "none"
-          : "0 0 8px rgba(255, 47, 179, 0.85), 0 0 22px rgba(255, 0, 183, 0.48), inset 0 0 14px rgba(255, 255, 255, 0.18)";
+        event.currentTarget.style.boxShadow =
+          disabled
+            ? "none"
+            : "0 0 8px rgba(255,47,179,0.85), 0 0 22px rgba(255,0,183,0.48), inset 0 0 14px rgba(255,255,255,0.18)";
       }}
       onMouseDown={(event) => {
         if (disabled) return;
@@ -208,10 +205,10 @@ function CyberpunkGhostButton({
         minHeight: "40px",
         padding: "9px 14px",
         border:
-          "1px solid rgba(255, 92, 205, 0.46)",
+          "1px solid rgba(255,92,205,0.46)",
         borderRadius: "10px",
         background:
-          "rgba(255, 47, 179, 0.08)",
+          "rgba(255,47,179,0.08)",
         color: cyberColors.pinkLight,
         fontSize: "13px",
         fontWeight: 800,
@@ -220,7 +217,7 @@ function CyberpunkGhostButton({
           : "pointer",
         opacity: disabled ? 0.5 : 1,
         boxShadow:
-          "inset 0 0 12px rgba(255, 47, 179, 0.08)",
+          "inset 0 0 12px rgba(255,47,179,0.08)",
         transition:
           "background 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease"
       }}
@@ -228,20 +225,20 @@ function CyberpunkGhostButton({
         if (disabled) return;
 
         event.currentTarget.style.background =
-          "rgba(255, 47, 179, 0.18)";
+          "rgba(255,47,179,0.18)";
 
         event.currentTarget.style.boxShadow =
-          "0 0 18px rgba(255, 47, 179, 0.25)";
+          "0 0 18px rgba(255,47,179,0.25)";
 
         event.currentTarget.style.transform =
           "translateY(-1px)";
       }}
       onMouseLeave={(event) => {
         event.currentTarget.style.background =
-          "rgba(255, 47, 179, 0.08)";
+          "rgba(255,47,179,0.08)";
 
         event.currentTarget.style.boxShadow =
-          "inset 0 0 12px rgba(255, 47, 179, 0.08)";
+          "inset 0 0 12px rgba(255,47,179,0.08)";
 
         event.currentTarget.style.transform =
           "translateY(0)";
@@ -276,15 +273,15 @@ function CyberpunkInput({
         padding: "12px 14px",
         outline: "none",
         border:
-          "1px solid rgba(255, 74, 194, 0.28)",
+          "1px solid rgba(255,74,194,0.28)",
         borderRadius: "11px",
         background:
-          "rgba(7, 2, 15, 0.78)",
+          "rgba(7,2,15,0.78)",
         color: "#ffffff",
         fontSize: "15px",
         boxSizing: "border-box",
         boxShadow:
-          "inset 0 0 14px rgba(0, 0, 0, 0.42)",
+          "inset 0 0 14px rgba(0,0,0,0.42)",
         transition:
           "border-color 0.16s ease, box-shadow 0.16s ease"
       }}
@@ -293,14 +290,14 @@ function CyberpunkInput({
           cyberColors.pink;
 
         event.currentTarget.style.boxShadow =
-          "0 0 0 3px rgba(255, 47, 179, 0.12), 0 0 18px rgba(255, 47, 179, 0.18), inset 0 0 14px rgba(0, 0, 0, 0.42)";
+          "0 0 0 3px rgba(255,47,179,0.12), 0 0 18px rgba(255,47,179,0.18), inset 0 0 14px rgba(0,0,0,0.42)";
       }}
       onBlur={(event) => {
         event.currentTarget.style.borderColor =
-          "rgba(255, 74, 194, 0.28)";
+          "rgba(255,74,194,0.28)";
 
         event.currentTarget.style.boxShadow =
-          "inset 0 0 14px rgba(0, 0, 0, 0.42)";
+          "inset 0 0 14px rgba(0,0,0,0.42)";
       }}
     />
   );
@@ -317,12 +314,12 @@ function ShotHistoryCard({ action }) {
         overflow: "hidden",
         padding: "16px",
         border:
-          "1px solid rgba(255, 58, 190, 0.25)",
+          "1px solid rgba(255,58,190,0.25)",
         borderRadius: "15px",
         background:
-          "linear-gradient(145deg, rgba(31, 8, 42, 0.96), rgba(13, 4, 23, 0.98))",
+          "linear-gradient(145deg, rgba(31,8,42,0.96), rgba(13,4,23,0.98))",
         boxShadow:
-          "0 12px 28px rgba(0, 0, 0, 0.24)"
+          "0 12px 28px rgba(0,0,0,0.24)"
       }}
     >
       <div
@@ -337,7 +334,7 @@ function ShotHistoryCard({ action }) {
           background:
             "linear-gradient(#ff2fb3, #d500ff)",
           boxShadow:
-            "0 0 12px rgba(255, 47, 179, 0.9)"
+            "0 0 12px rgba(255,47,179,0.9)"
         }}
       />
 
@@ -393,12 +390,12 @@ function ShotHistoryCard({ action }) {
             borderRadius: "999px",
             border: `1px solid ${
               action.executed
-                ? "rgba(74, 255, 176, 0.4)"
-                : "rgba(255, 77, 198, 0.4)"
+                ? "rgba(74,255,176,0.4)"
+                : "rgba(255,77,198,0.4)"
             }`,
             background: action.executed
-              ? "rgba(74, 255, 176, 0.1)"
-              : "rgba(255, 47, 179, 0.1)",
+              ? "rgba(74,255,176,0.1)"
+              : "rgba(255,47,179,0.1)",
             color: action.executed
               ? "#65ffc0"
               : "#ff79da",
@@ -429,7 +426,7 @@ function ShotHistoryCard({ action }) {
             padding: "8px 10px",
             borderRadius: "10px",
             background:
-              "rgba(255, 47, 179, 0.1)",
+              "rgba(255,47,179,0.1)",
             color: cyberColors.pinkLight
           }}
         >
@@ -444,7 +441,7 @@ function ShotHistoryCard({ action }) {
           style={{
             margin: 0,
             color:
-              "rgba(255, 255, 255, 0.78)",
+              "rgba(255,255,255,0.78)",
             fontSize: "14px",
             lineHeight: 1.6,
             wordBreak: "break-word"
@@ -459,7 +456,147 @@ function ShotHistoryCard({ action }) {
         style={{
           marginTop: "13px",
           color:
-            "rgba(255, 255, 255, 0.38)",
+            "rgba(255,255,255,0.38)",
+          fontSize: "11px",
+          textAlign: "right"
+        }}
+      >
+        {formatDate(action.created_at)}
+      </div>
+    </article>
+  );
+}
+
+function MyLogCard({ action }) {
+  return (
+    <article
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        padding: "15px",
+        border:
+          "1px solid rgba(255,58,190,0.25)",
+        borderRadius: "14px",
+        background:
+          "linear-gradient(145deg, rgba(31,8,42,0.96), rgba(13,4,23,0.98))"
+      }}
+    >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "15%",
+          bottom: "15%",
+          left: 0,
+          width: "3px",
+          borderRadius: "999px",
+          background:
+            "linear-gradient(#ff2fb3, #d500ff)",
+          boxShadow:
+            "0 0 12px rgba(255,47,179,0.9)"
+        }}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          gap: "10px"
+        }}
+      >
+        <div>
+          <span
+            style={{
+              display: "block",
+              marginBottom: "4px",
+              color:
+                "rgba(255,255,255,0.45)",
+              fontSize: "10px"
+            }}
+          >
+            TARGET
+          </span>
+
+          <strong
+            style={{
+              color: cyberColors.pinkLight,
+              fontSize: "16px"
+            }}
+          >
+            {action.target_nickname ||
+              "대상 미표시"}
+          </strong>
+        </div>
+
+        <span
+          style={{
+            flexShrink: 0,
+            padding: "5px 8px",
+            borderRadius: "999px",
+            border: `1px solid ${
+              action.executed
+                ? "rgba(74,255,176,0.4)"
+                : "rgba(255,77,198,0.4)"
+            }`,
+            background: action.executed
+              ? "rgba(74,255,176,0.1)"
+              : "rgba(255,47,179,0.1)",
+            color: action.executed
+              ? "#65ffc0"
+              : "#ff79da",
+            fontSize: "10px",
+            fontWeight: 900
+          }}
+        >
+          {action.executed
+            ? "실행 완료"
+            : "실행 대기"}
+        </span>
+      </div>
+
+      <div
+        style={{
+          marginTop: "13px",
+          display: "flex",
+          alignItems: "flex-start",
+          gap: "10px"
+        }}
+      >
+        <div
+          style={{
+            flexShrink: 0,
+            padding: "8px 10px",
+            borderRadius: "10px",
+            background:
+              "rgba(255,47,179,0.1)",
+            color: cyberColors.pinkLight,
+            fontWeight: 900
+          }}
+        >
+          💥 {Number(action.used_bullets || 0)}발
+        </div>
+
+        <p
+          style={{
+            margin: 0,
+            color:
+              "rgba(255,255,255,0.78)",
+            fontSize: "13px",
+            lineHeight: 1.55,
+            wordBreak: "break-word"
+          }}
+        >
+          {action.action_text ||
+            "등록된 텍스트가 없습니다."}
+        </p>
+      </div>
+
+      <div
+        style={{
+          marginTop: "12px",
+          color:
+            "rgba(255,255,255,0.38)",
           fontSize: "11px",
           textAlign: "right"
         }}
@@ -490,7 +627,7 @@ function WelcomeLoading({
         justifyContent: "center",
         padding: "22px",
         background:
-          "radial-gradient(circle at top, rgba(88, 15, 92, 0.98), rgba(7, 2, 15, 0.99))",
+          "radial-gradient(circle at top, rgba(88,15,92,0.98), rgba(7,2,15,0.99))",
         backdropFilter: "blur(12px)"
       }}
     >
@@ -501,12 +638,12 @@ function WelcomeLoading({
           padding: "34px 24px",
           overflow: "hidden",
           border:
-            "1px solid rgba(255, 65, 196, 0.55)",
+            "1px solid rgba(255,65,196,0.55)",
           borderRadius: "24px",
           background:
-            "linear-gradient(145deg, rgba(29, 5, 38, 0.96), rgba(10, 3, 20, 0.98))",
+            "linear-gradient(145deg, rgba(29,5,38,0.96), rgba(10,3,20,0.98))",
           boxShadow:
-            "0 0 26px rgba(255, 0, 183, 0.28), 0 28px 90px rgba(0, 0, 0, 0.58)",
+            "0 0 26px rgba(255,0,183,0.28), 0 28px 90px rgba(0,0,0,0.58)",
           color: "#ffffff",
           textAlign: "center"
         }}
@@ -527,12 +664,12 @@ function WelcomeLoading({
               display: "grid",
               placeItems: "center",
               border:
-                "1px solid rgba(255, 130, 222, 0.86)",
+                "1px solid rgba(255,130,222,0.86)",
               borderRadius: "20px",
               background:
                 "linear-gradient(135deg, #ff158f, #d500ff)",
               boxShadow:
-                "0 0 18px rgba(255, 20, 160, 0.9), 0 0 42px rgba(213, 0, 255, 0.55)",
+                "0 0 18px rgba(255,20,160,0.9), 0 0 42px rgba(213,0,255,0.55)",
               fontSize: "34px"
             }}
           >
@@ -558,7 +695,7 @@ function WelcomeLoading({
                 "clamp(25px, 7vw, 34px)",
               lineHeight: 1.25,
               textShadow:
-                "0 0 14px rgba(255, 46, 188, 0.8)"
+                "0 0 14px rgba(255,46,188,0.8)"
             }}
           >
             {nickname}님 환영합니다
@@ -568,7 +705,7 @@ function WelcomeLoading({
             style={{
               margin: "0 0 25px",
               color:
-                "rgba(255, 255, 255, 0.7)",
+                "rgba(255,255,255,0.7)",
               fontSize: "14px"
             }}
           >
@@ -580,10 +717,10 @@ function WelcomeLoading({
               height: "13px",
               overflow: "hidden",
               border:
-                "1px solid rgba(255, 74, 194, 0.3)",
+                "1px solid rgba(255,74,194,0.3)",
               borderRadius: "999px",
               background:
-                "rgba(255, 255, 255, 0.08)"
+                "rgba(255,255,255,0.08)"
             }}
           >
             <div
@@ -594,7 +731,7 @@ function WelcomeLoading({
                 background:
                   "linear-gradient(90deg, #ff167f 0%, #ff47c7 50%, #d600ff 100%)",
                 boxShadow:
-                  "0 0 12px rgba(255, 31, 170, 1), 0 0 28px rgba(214, 0, 255, 0.7)",
+                  "0 0 12px rgba(255,31,170,1), 0 0 28px rgba(214,0,255,0.7)",
                 transition:
                   "width 1.55s cubic-bezier(0.22, 1, 0.36, 1)"
               }}
@@ -607,7 +744,7 @@ function WelcomeLoading({
               display: "flex",
               justifyContent: "space-between",
               color:
-                "rgba(255, 255, 255, 0.64)",
+                "rgba(255,255,255,0.64)",
               fontSize: "11px"
             }}
           >
@@ -660,6 +797,15 @@ export default function PlayerPage() {
   const [shotText, setShotText] =
     useState("");
 
+  const [myActions, setMyActions] =
+    useState([]);
+
+  const [showMyLogs, setShowMyLogs] =
+    useState(false);
+
+  const [myLogsLoading, setMyLogsLoading] =
+    useState(false);
+
   const showToast = useCallback((message) => {
     setToast(message);
 
@@ -708,7 +854,7 @@ export default function PlayerPage() {
             .order("created_at", {
               ascending: false
             })
-            .limit(30)
+            .limit(1)
         ]);
 
         if (playerResult.error) {
@@ -741,6 +887,8 @@ export default function PlayerPage() {
 
             setCurrentPlayerId("");
             setLoginPlayer(null);
+            setMyActions([]);
+            setShowMyLogs(false);
           }
         }
       } catch (error) {
@@ -794,6 +942,11 @@ export default function PlayerPage() {
       window.clearTimeout(closeTimer);
     };
   }, [welcomeVisible]);
+
+  useEffect(() => {
+    setMyActions([]);
+    setShowMyLogs(false);
+  }, [currentPlayerId]);
 
   const currentPlayer = useMemo(() => {
     return (
@@ -866,6 +1019,9 @@ export default function PlayerPage() {
         player.id
       );
 
+      setMyActions([]);
+      setShowMyLogs(false);
+
       setCurrentPlayerId(player.id);
       setLoginPlayer(player);
       setSelectedTargetId("");
@@ -886,6 +1042,95 @@ export default function PlayerPage() {
     }
   }
 
+  async function loadMyActions() {
+    if (
+      !supabase ||
+      !currentPlayer?.id
+    ) {
+      setMyActions([]);
+      return;
+    }
+
+    const loggedInPlayerId =
+      currentPlayer.id;
+
+    setMyLogsLoading(true);
+    setMyActions([]);
+
+    try {
+      const { data, error } =
+        await supabase
+          .from("bullet_actions")
+          .select(
+            "id, created_at, player_id, target_nickname, used_bullets, action_text, executed, executed_at"
+          )
+          .eq(
+            "player_id",
+            loggedInPlayerId
+          )
+          .order("created_at", {
+            ascending: false
+          })
+          .limit(50);
+
+      if (error) {
+        throw error;
+      }
+
+      /*
+       * 서버에서 player_id로 조회한 뒤에도
+       * 현재 로그인 플레이어 id와 정확히 같은 기록만
+       * 한 번 더 필터링합니다.
+       */
+      const safeMyActions = (
+        data || []
+      ).filter(
+        (action) =>
+          String(action.player_id) ===
+          String(loggedInPlayerId)
+      );
+
+      /*
+       * 조회 중 로그인 계정이 바뀐 경우
+       * 이전 계정의 결과를 화면에 넣지 않습니다.
+       */
+      const storedPlayerId =
+        sessionStorage.getItem(
+          "bullet_current_player_id"
+        );
+
+      if (
+        String(storedPlayerId) !==
+        String(loggedInPlayerId)
+      ) {
+        setMyActions([]);
+        return;
+      }
+
+      setMyActions(safeMyActions);
+    } catch (error) {
+      setMyActions([]);
+
+      showToast(
+        error.message ||
+          "내 사격 기록을 불러오지 못했습니다."
+      );
+    } finally {
+      setMyLogsLoading(false);
+    }
+  }
+
+  async function toggleMyLogs() {
+    if (showMyLogs) {
+      setShowMyLogs(false);
+      setMyActions([]);
+      return;
+    }
+
+    setShowMyLogs(true);
+    await loadMyActions();
+  }
+
   function leavePlayer() {
     sessionStorage.removeItem(
       "bullet_current_player_id"
@@ -901,6 +1146,9 @@ export default function PlayerPage() {
     setWelcomeNickname("");
     setNickname("");
     setLoginPassword("");
+    setShowMyLogs(false);
+    setMyActions([]);
+    setMyLogsLoading(false);
   }
 
   async function fireBullet() {
@@ -1025,6 +1273,10 @@ export default function PlayerPage() {
         silent: true
       });
 
+      if (showMyLogs) {
+        await loadMyActions();
+      }
+
       showToast(
         `${target.nickname}에게 ${amount}발을 사용했습니다.`
       );
@@ -1053,7 +1305,7 @@ export default function PlayerPage() {
           background: `
             radial-gradient(
               circle at top,
-              rgba(112, 13, 104, 0.2),
+              rgba(112,13,104,0.2),
               transparent 40%
             ),
             ${cyberColors.background}
@@ -1074,12 +1326,12 @@ export default function PlayerPage() {
               aspectRatio: "750 / 500",
               overflow: "hidden",
               border:
-                "1px solid rgba(255, 63, 194, 0.34)",
+                "1px solid rgba(255,63,194,0.34)",
               borderRadius: "20px",
               background:
                 "linear-gradient(145deg, #16051d, #07020c)",
               boxShadow:
-                "0 0 20px rgba(255, 0, 179, 0.14), 0 18px 42px rgba(0,0,0,0.35)"
+                "0 0 20px rgba(255,0,179,0.14), 0 18px 42px rgba(0,0,0,0.35)"
             }}
           >
             <img
@@ -1090,7 +1342,8 @@ export default function PlayerPage() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                objectPosition: "center center"
+                objectPosition:
+                  "center center"
               }}
               onError={(event) => {
                 event.currentTarget.style.display =
@@ -1127,11 +1380,12 @@ export default function PlayerPage() {
                   gap: "7px",
                   padding: "6px 10px",
                   border:
-                    "1px solid rgba(255, 82, 204, 0.62)",
+                    "1px solid rgba(255,82,204,0.62)",
                   borderRadius: "999px",
                   background:
-                    "rgba(19, 3, 29, 0.72)",
-                  color: cyberColors.pinkLight,
+                    "rgba(19,3,29,0.72)",
+                  color:
+                    cyberColors.pinkLight,
                   fontSize: "10px",
                   fontWeight: 900,
                   letterSpacing: "0.14em"
@@ -1149,10 +1403,10 @@ export default function PlayerPage() {
               marginTop: "14px",
               overflow: "hidden",
               border:
-                "1px solid rgba(255, 62, 194, 0.3)",
+                "1px solid rgba(255,62,194,0.3)",
               borderRadius: "20px",
               background:
-                "linear-gradient(180deg, rgba(25, 7, 36, 0.98), rgba(10, 3, 18, 0.99))",
+                "linear-gradient(180deg, rgba(25,7,36,0.98), rgba(10,3,18,0.99))",
               boxShadow:
                 "0 20px 52px rgba(0,0,0,0.38)"
             }}
@@ -1174,7 +1428,8 @@ export default function PlayerPage() {
                 <div
                   style={{
                     marginBottom: "7px",
-                    color: cyberColors.pink,
+                    color:
+                      cyberColors.pink,
                     fontSize: "10px",
                     fontWeight: 900,
                     letterSpacing: "0.18em"
@@ -1196,7 +1451,8 @@ export default function PlayerPage() {
                 <p
                   style={{
                     margin: 0,
-                    color: cyberColors.muted,
+                    color:
+                      cyberColors.muted,
                     fontSize: "13px",
                     lineHeight: 1.6
                   }}
@@ -1212,10 +1468,10 @@ export default function PlayerPage() {
                     marginBottom: "16px",
                     padding: "11px 12px",
                     border:
-                      "1px solid rgba(255, 195, 76, 0.32)",
+                      "1px solid rgba(255,195,76,0.32)",
                     borderRadius: "10px",
                     background:
-                      "rgba(255, 195, 76, 0.08)",
+                      "rgba(255,195,76,0.08)",
                     color: "#ffd369",
                     fontSize: "12px"
                   }}
@@ -1332,7 +1588,7 @@ export default function PlayerPage() {
         background: `
           radial-gradient(
             circle at top,
-            rgba(121, 11, 111, 0.22),
+            rgba(121,11,111,0.22),
             transparent 35%
           ),
           ${cyberColors.background}
@@ -1346,18 +1602,19 @@ export default function PlayerPage() {
           margin: "0 auto"
         }}
       >
+        {/* 플레이어 정보 */}
         <section
           style={{
             position: "relative",
             overflow: "hidden",
             padding: "20px",
             border:
-              "1px solid rgba(255, 62, 194, 0.34)",
+              "1px solid rgba(255,62,194,0.34)",
             borderRadius: "20px",
             background:
-              "linear-gradient(145deg, rgba(35, 8, 46, 0.98), rgba(12, 3, 22, 0.99))",
+              "linear-gradient(145deg, rgba(35,8,46,0.98), rgba(12,3,22,0.99))",
             boxShadow:
-              "0 0 22px rgba(255, 0, 183, 0.12), 0 18px 48px rgba(0,0,0,0.36)"
+              "0 0 22px rgba(255,0,183,0.12), 0 18px 48px rgba(0,0,0,0.36)"
           }}
         >
           <CyberGridOverlay />
@@ -1372,7 +1629,8 @@ export default function PlayerPage() {
               style={{
                 display: "flex",
                 alignItems: "flex-start",
-                justifyContent: "space-between",
+                justifyContent:
+                  "space-between",
                 gap: "14px"
               }}
             >
@@ -1384,11 +1642,12 @@ export default function PlayerPage() {
                     gap: "6px",
                     padding: "6px 10px",
                     border:
-                      "1px solid rgba(255, 73, 198, 0.42)",
+                      "1px solid rgba(255,73,198,0.42)",
                     borderRadius: "999px",
                     background:
-                      "rgba(255, 47, 179, 0.09)",
-                    color: cyberColors.pinkLight,
+                      "rgba(255,47,179,0.09)",
+                    color:
+                      cyberColors.pinkLight,
                     fontSize: "10px",
                     fontWeight: 900,
                     letterSpacing: "0.1em"
@@ -1405,7 +1664,7 @@ export default function PlayerPage() {
                     fontSize: "28px",
                     lineHeight: 1.1,
                     textShadow:
-                      "0 0 14px rgba(255, 47, 179, 0.55)"
+                      "0 0 14px rgba(255,47,179,0.55)"
                   }}
                 >
                   {currentPlayer.nickname}
@@ -1414,7 +1673,8 @@ export default function PlayerPage() {
                 <p
                   style={{
                     margin: 0,
-                    color: cyberColors.muted,
+                    color:
+                      cyberColors.muted,
                     fontSize: "13px"
                   }}
                 >
@@ -1444,10 +1704,10 @@ export default function PlayerPage() {
                   minWidth: 0,
                   padding: "14px 7px",
                   border:
-                    "1px solid rgba(255, 62, 194, 0.24)",
+                    "1px solid rgba(255,62,194,0.24)",
                   borderRadius: "14px",
                   background:
-                    "rgba(255, 47, 179, 0.07)",
+                    "rgba(255,47,179,0.07)",
                   textAlign: "center"
                 }}
               >
@@ -1455,7 +1715,8 @@ export default function PlayerPage() {
                   style={{
                     display: "block",
                     marginBottom: "6px",
-                    color: cyberColors.muted,
+                    color:
+                      cyberColors.muted,
                     fontSize: "10px",
                     whiteSpace: "nowrap"
                   }}
@@ -1466,11 +1727,12 @@ export default function PlayerPage() {
                 <strong
                   style={{
                     display: "block",
-                    color: cyberColors.pinkLight,
+                    color:
+                      cyberColors.pinkLight,
                     fontSize:
                       "clamp(17px, 5vw, 22px)",
                     textShadow:
-                      "0 0 12px rgba(255, 47, 179, 0.5)"
+                      "0 0 12px rgba(255,47,179,0.5)"
                   }}
                 >
                   {remaining(currentPlayer)}발
@@ -1482,10 +1744,10 @@ export default function PlayerPage() {
                   minWidth: 0,
                   padding: "14px 7px",
                   border:
-                    "1px solid rgba(255, 79, 195, 0.27)",
+                    "1px solid rgba(255,79,195,0.27)",
                   borderRadius: "14px",
                   background:
-                    "rgba(255, 24, 143, 0.08)",
+                    "rgba(255,24,143,0.08)",
                   textAlign: "center"
                 }}
               >
@@ -1493,7 +1755,8 @@ export default function PlayerPage() {
                   style={{
                     display: "block",
                     marginBottom: "6px",
-                    color: cyberColors.muted,
+                    color:
+                      cyberColors.muted,
                     fontSize: "10px",
                     whiteSpace: "nowrap"
                   }}
@@ -1508,7 +1771,7 @@ export default function PlayerPage() {
                     fontSize:
                       "clamp(17px, 5vw, 22px)",
                     textShadow:
-                      "0 0 12px rgba(255, 47, 179, 0.5)"
+                      "0 0 12px rgba(255,47,179,0.5)"
                   }}
                 >
                   {Number(
@@ -1524,10 +1787,10 @@ export default function PlayerPage() {
                   minWidth: 0,
                   padding: "14px 7px",
                   border:
-                    "1px solid rgba(213, 0, 255, 0.24)",
+                    "1px solid rgba(213,0,255,0.24)",
                   borderRadius: "14px",
                   background:
-                    "rgba(213, 0, 255, 0.07)",
+                    "rgba(213,0,255,0.07)",
                   textAlign: "center"
                 }}
               >
@@ -1535,7 +1798,8 @@ export default function PlayerPage() {
                   style={{
                     display: "block",
                     marginBottom: "6px",
-                    color: cyberColors.muted,
+                    color:
+                      cyberColors.muted,
                     fontSize: "10px",
                     whiteSpace: "nowrap"
                   }}
@@ -1550,7 +1814,7 @@ export default function PlayerPage() {
                     fontSize:
                       "clamp(17px, 5vw, 22px)",
                     textShadow:
-                      "0 0 12px rgba(213, 0, 255, 0.5)"
+                      "0 0 12px rgba(213,0,255,0.5)"
                   }}
                 >
                   {Number(
@@ -1564,6 +1828,7 @@ export default function PlayerPage() {
           </div>
         </section>
 
+        {/* 사격 대상 */}
         <section
           style={{
             position: "relative",
@@ -1571,10 +1836,10 @@ export default function PlayerPage() {
             overflow: "hidden",
             padding: "20px",
             border:
-              "1px solid rgba(255, 62, 194, 0.28)",
+              "1px solid rgba(255,62,194,0.28)",
             borderRadius: "20px",
             background:
-              "linear-gradient(145deg, rgba(27, 7, 38, 0.98), rgba(11, 3, 20, 0.99))",
+              "linear-gradient(145deg, rgba(27,7,38,0.98), rgba(11,3,20,0.99))",
             boxShadow:
               "0 18px 45px rgba(0,0,0,0.32)"
           }}
@@ -1594,7 +1859,8 @@ export default function PlayerPage() {
             >
               <div
                 style={{
-                  color: cyberColors.pink,
+                  color:
+                    cyberColors.pink,
                   fontSize: "10px",
                   fontWeight: 900,
                   letterSpacing: "0.16em"
@@ -1616,7 +1882,8 @@ export default function PlayerPage() {
               <p
                 style={{
                   margin: 0,
-                  color: cyberColors.muted,
+                  color:
+                    cyberColors.muted,
                   fontSize: "12px"
                 }}
               >
@@ -1639,9 +1906,10 @@ export default function PlayerPage() {
                     gridColumn: "1 / -1",
                     padding: "24px 14px",
                     border:
-                      "1px dashed rgba(255, 61, 192, 0.24)",
+                      "1px dashed rgba(255,61,192,0.24)",
                     borderRadius: "13px",
-                    color: cyberColors.muted,
+                    color:
+                      cyberColors.muted,
                     textAlign: "center",
                     fontSize: "13px"
                   }}
@@ -1651,7 +1919,8 @@ export default function PlayerPage() {
               ) : (
                 targets.map((target) => {
                   const selected =
-                    selectedTargetId === target.id;
+                    selectedTargetId ===
+                    target.id;
 
                   return (
                     <button
@@ -1667,16 +1936,16 @@ export default function PlayerPage() {
                         padding: "12px",
                         border: selected
                           ? `1px solid ${cyberColors.pinkLight}`
-                          : "1px solid rgba(255, 62, 194, 0.2)",
+                          : "1px solid rgba(255,62,194,0.2)",
                         borderRadius: "13px",
                         background: selected
-                          ? "linear-gradient(145deg, rgba(255, 47, 179, 0.2), rgba(213, 0, 255, 0.14))"
-                          : "rgba(255, 255, 255, 0.025)",
+                          ? "linear-gradient(145deg, rgba(255,47,179,0.2), rgba(213,0,255,0.14))"
+                          : "rgba(255,255,255,0.025)",
                         color: "#ffffff",
                         textAlign: "left",
                         cursor: "pointer",
                         boxShadow: selected
-                          ? "0 0 18px rgba(255, 47, 179, 0.3)"
+                          ? "0 0 18px rgba(255,47,179,0.3)"
                           : "none"
                       }}
                     >
@@ -1701,7 +1970,9 @@ export default function PlayerPage() {
                         }}
                       >
                         피격{" "}
-                        {target.hit_bullets || 0}회
+                        {target.hit_bullets ||
+                          0}
+                        회
                       </small>
                     </button>
                   );
@@ -1786,6 +2057,7 @@ export default function PlayerPage() {
           </div>
         </section>
 
+        {/* 공개 최신 기록 */}
         <section
           style={{
             position: "relative",
@@ -1793,10 +2065,10 @@ export default function PlayerPage() {
             overflow: "hidden",
             padding: "20px",
             border:
-              "1px solid rgba(255, 62, 194, 0.26)",
+              "1px solid rgba(255,62,194,0.26)",
             borderRadius: "20px",
             background:
-              "linear-gradient(145deg, rgba(25, 6, 35, 0.98), rgba(10, 3, 18, 0.99))",
+              "linear-gradient(145deg, rgba(25,6,35,0.98), rgba(10,3,18,0.99))",
             boxShadow:
               "0 18px 45px rgba(0,0,0,0.32)"
           }}
@@ -1813,7 +2085,8 @@ export default function PlayerPage() {
               style={{
                 display: "flex",
                 alignItems: "flex-start",
-                justifyContent: "space-between",
+                justifyContent:
+                  "space-between",
                 gap: "12px",
                 marginBottom: "17px"
               }}
@@ -1821,13 +2094,14 @@ export default function PlayerPage() {
               <div>
                 <div
                   style={{
-                    color: cyberColors.pink,
+                    color:
+                      cyberColors.pink,
                     fontSize: "10px",
                     fontWeight: 900,
                     letterSpacing: "0.16em"
                   }}
                 >
-                  RECENT LOG
+                  LATEST LOG
                 </div>
 
                 <h2
@@ -1843,13 +2117,14 @@ export default function PlayerPage() {
                 <p
                   style={{
                     margin: 0,
-                    color: cyberColors.muted,
+                    color:
+                      cyberColors.muted,
                     fontSize: "12px",
                     lineHeight: 1.5
                   }}
                 >
-                  발사자는 익명으로, 대상자는
-                  닉네임으로 표시됩니다.
+                  가장 최근 사격 기록 1개만
+                  표시됩니다.
                 </p>
               </div>
 
@@ -1858,11 +2133,12 @@ export default function PlayerPage() {
                   flexShrink: 0,
                   padding: "6px 9px",
                   border:
-                    "1px solid rgba(255, 72, 198, 0.35)",
+                    "1px solid rgba(255,72,198,0.35)",
                   borderRadius: "999px",
                   background:
-                    "rgba(255, 47, 179, 0.08)",
-                  color: cyberColors.pinkLight,
+                    "rgba(255,47,179,0.08)",
+                  color:
+                    cyberColors.pinkLight,
                   fontSize: "10px",
                   fontWeight: 900
                 }}
@@ -1876,9 +2152,10 @@ export default function PlayerPage() {
                 style={{
                   padding: "28px 14px",
                   border:
-                    "1px dashed rgba(255, 61, 192, 0.23)",
+                    "1px dashed rgba(255,61,192,0.23)",
                   borderRadius: "13px",
-                  color: cyberColors.muted,
+                  color:
+                    cyberColors.muted,
                   textAlign: "center",
                   fontSize: "13px"
                 }}
@@ -1886,18 +2163,154 @@ export default function PlayerPage() {
                 아직 사격 기록이 없습니다.
               </div>
             ) : (
-              <div
-                style={{
-                  display: "grid",
-                  gap: "10px"
-                }}
-              >
-                {actions.map((action) => (
+              actions
+                .slice(0, 1)
+                .map((action) => (
                   <ShotHistoryCard
                     key={action.id}
                     action={action}
                   />
-                ))}
+                ))
+            )}
+          </div>
+        </section>
+
+        {/* 본인 전용 로그 */}
+        <section
+          style={{
+            position: "relative",
+            marginTop: "14px",
+            overflow: "hidden",
+            padding: "20px",
+            border:
+              "1px solid rgba(255,62,194,0.26)",
+            borderRadius: "20px",
+            background:
+              "linear-gradient(145deg, rgba(25,6,35,0.98), rgba(10,3,18,0.99))",
+            boxShadow:
+              "0 18px 45px rgba(0,0,0,0.32)"
+          }}
+        >
+          <CyberGridOverlay />
+
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent:
+                  "space-between",
+                gap: "12px"
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    color:
+                      cyberColors.pink,
+                    fontSize: "10px",
+                    fontWeight: 900,
+                    letterSpacing: "0.16em"
+                  }}
+                >
+                  PERSONAL LOG
+                </div>
+
+                <h2
+                  style={{
+                    margin: "6px 0 5px",
+                    color: "#ffffff",
+                    fontSize: "21px"
+                  }}
+                >
+                  내 사격 기록
+                </h2>
+
+                <p
+                  style={{
+                    margin: 0,
+                    color:
+                      cyberColors.muted,
+                    fontSize: "12px",
+                    lineHeight: 1.5
+                  }}
+                >
+                  현재 로그인한 플레이어가 직접
+                  사용한 기록만 표시됩니다.
+                </p>
+              </div>
+
+              <CyberpunkGhostButton
+                disabled={myLogsLoading}
+                onClick={toggleMyLogs}
+              >
+                {myLogsLoading
+                  ? "불러오는 중..."
+                  : showMyLogs
+                    ? "내 로그 닫기"
+                    : "내 로그 보기"}
+              </CyberpunkGhostButton>
+            </div>
+
+            {showMyLogs && (
+              <div
+                style={{
+                  marginTop: "18px"
+                }}
+              >
+                {myLogsLoading ? (
+                  <div
+                    style={{
+                      padding: "28px 14px",
+                      border:
+                        "1px dashed rgba(255,61,192,0.23)",
+                      borderRadius: "13px",
+                      color:
+                        cyberColors.muted,
+                      textAlign: "center",
+                      fontSize: "13px"
+                    }}
+                  >
+                    내 기록을 불러오고 있습니다.
+                  </div>
+                ) : myActions.length === 0 ? (
+                  <div
+                    style={{
+                      padding: "28px 14px",
+                      border:
+                        "1px dashed rgba(255,61,192,0.23)",
+                      borderRadius: "13px",
+                      color:
+                        cyberColors.muted,
+                      textAlign: "center",
+                      fontSize: "13px"
+                    }}
+                  >
+                    아직 내가 사용한 총알 기록이
+                    없습니다.
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      display: "grid",
+                      gap: "10px"
+                    }}
+                  >
+                    {myActions.map(
+                      (action) => (
+                        <MyLogCard
+                          key={action.id}
+                          action={action}
+                        />
+                      )
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
