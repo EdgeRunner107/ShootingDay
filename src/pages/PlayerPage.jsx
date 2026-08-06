@@ -1184,6 +1184,7 @@ export default function PlayerPage() {
   async function loadMyLogs() {
     if (
       !supabase ||
+      !currentPlayer?.id ||
       !currentPlayer?.nickname
     ) {
       setMySentActions([]);
@@ -1191,8 +1192,11 @@ export default function PlayerPage() {
       return;
     }
 
+    const loggedInPlayerId =
+      String(currentPlayer.id);
+
     const loggedInNickname =
-      currentPlayer.nickname;
+      String(currentPlayer.nickname).trim();
 
     setMyLogsLoading(true);
     setMySentActions([]);
@@ -1203,22 +1207,30 @@ export default function PlayerPage() {
         sentResult,
         receivedResult
       ] = await Promise.all([
+        /*
+         * 내가 쏜 목록은 익명 처리된 뷰가 아니라
+         * 원본 bullet_actions 테이블에서 player_id로 조회합니다.
+         */
         supabase
-          .from("player_bullet_actions")
+          .from("bullet_actions")
           .select(
-            "id, created_at, nickname, target_nickname, used_bullets, action_text, executed, executed_at"
+            "id, created_at, player_id, nickname, target_nickname, used_bullets, action_text, executed, executed_at"
           )
           .eq(
-            "nickname",
-            loggedInNickname
+            "player_id",
+            currentPlayer.id
           )
           .order("created_at", {
             ascending: false
           })
           .limit(50),
 
+        /*
+         * 내가 맞은 목록도 원본 테이블에서 조회하지만
+         * 발사자 nickname은 select하지 않습니다.
+         */
         supabase
-          .from("player_bullet_actions")
+          .from("bullet_actions")
           .select(
             "id, created_at, target_nickname, used_bullets, action_text, executed, executed_at"
           )
@@ -1247,7 +1259,7 @@ export default function PlayerPage() {
 
       if (
         String(activePlayerId) !==
-        String(currentPlayer.id)
+        loggedInPlayerId
       ) {
         setMySentActions([]);
         setMyReceivedActions([]);
@@ -1258,8 +1270,8 @@ export default function PlayerPage() {
         sentResult.data || []
       ).filter(
         (action) =>
-          String(action.nickname) ===
-          String(loggedInNickname)
+          String(action.player_id) ===
+          loggedInPlayerId
       );
 
       const safeReceivedActions = (
@@ -1268,15 +1280,12 @@ export default function PlayerPage() {
         .filter(
           (action) =>
             String(
-              action.target_nickname
-            ) ===
-            String(loggedInNickname)
+              action.target_nickname || ""
+            ).trim() === loggedInNickname
         )
         .map((action) => ({
           id: action.id,
           created_at: action.created_at,
-          target_nickname:
-            action.target_nickname,
           used_bullets:
             action.used_bullets,
           action_text:
@@ -1284,7 +1293,8 @@ export default function PlayerPage() {
           executed:
             action.executed,
           executed_at:
-            action.executed_at
+            action.executed_at,
+          shooterNickname: "익명"
         }));
 
       setMySentActions(
@@ -1295,6 +1305,11 @@ export default function PlayerPage() {
         safeReceivedActions
       );
     } catch (error) {
+      console.error(
+        "내 사격 기록 조회 오류:",
+        error
+      );
+
       setMySentActions([]);
       setMyReceivedActions([]);
 
