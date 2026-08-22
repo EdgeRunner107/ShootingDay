@@ -1550,22 +1550,20 @@ export default function PlayerPage() {
                 "0 0 20px rgba(255,0,179,0.14), 0 18px 42px rgba(0,0,0,0.35)"
             }}
           >
-            <img
-              src="/bgimg.png"
-              alt="게임 참가 메인 이미지"
-              style={{
-                display: "block",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition:
-                  "center center"
-              }}
-              onError={(event) => {
-                event.currentTarget.style.display =
-                  "none";
-              }}
-            />
+          <img
+                  src="/bgimg.png"
+                  alt="게임 참가 메인 이미지"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center 30%"
+                  }}
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
 
             <div
               aria-hidden="true"
@@ -1730,7 +1728,7 @@ export default function PlayerPage() {
                       enterPlayer();
                     }
                   }}
-                  placeholder="예: 여리"
+                  placeholder="예: 하루"
                   autoComplete="username"
                 />
               </div>
