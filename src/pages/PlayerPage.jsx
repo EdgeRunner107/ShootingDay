@@ -1728,7 +1728,7 @@ export default function PlayerPage() {
                       enterPlayer();
                     }
                   }}
-                  placeholder="예: 하루"
+                  placeholder="예: 리진"
                   autoComplete="username"
                 />
               </div>
