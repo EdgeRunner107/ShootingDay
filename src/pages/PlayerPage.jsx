@@ -1551,7 +1551,7 @@ export default function PlayerPage() {
             }}
           >
           <img
-                  src="/bgimg.png"
+                  src="/bgimg6.png"
                   alt="게임 참가 메인 이미지"
                   style={{
                     display: "block",
